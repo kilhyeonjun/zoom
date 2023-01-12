@@ -3,6 +3,7 @@ const socket = io();
 const welcome = document.getElementById('welcome');
 const form = welcome.querySelector('form');
 const room = document.getElementById('room');
+const nameForm = document.querySelector('#name');
 
 room.hidden = true;
 
@@ -27,9 +28,12 @@ function handleMessageSubmit(event) {
 
 function handleNicknameSubmit(event) {
   event.preventDefault();
-  const input = room.querySelector('#name input');
-  socket.emit('nickname', input.value);
+  const input = nameForm.querySelector('input');
+  socket.emit('nickname', input.value, () => {
+    nameForm.style.display = 'none';
+  });
 }
+nameForm.addEventListener('submit', handleNicknameSubmit);
 
 function showRoom() {
   welcome.hidden = true;
@@ -37,9 +41,7 @@ function showRoom() {
   const h3 = room.querySelector('h3');
   h3.innerText = `Room ${roomName}`;
   const msgForm = room.querySelector('#msg');
-  const nameForm = room.querySelector('#name');
   msgForm.addEventListener('submit', handleMessageSubmit);
-  nameForm.addEventListener('submit', handleNicknameSubmit);
 }
 
 function handleRoomSubmit(event) {

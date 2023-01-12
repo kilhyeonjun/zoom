@@ -10,6 +10,10 @@ html(lang="en")
         header
             h1 Zoom
         main
+            div 
+                form#name
+                    input(placeholder="nickname", required, type="text")
+                    button Send
             div#welcome
                 form
                     input(placeholder="room name", required, type="text")
@@ -19,9 +23,6 @@ html(lang="en")
             div#room
                 h3
                 ul
-                form#name
-                    input(placeholder="nickname", required, type="text")
-                    button Send
                 form#msg
                     input(placeholder="message", required, type="text")
                     button Send
